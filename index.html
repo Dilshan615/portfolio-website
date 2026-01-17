@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Premium portfolio marketplace - Buy and sell high-quality web projects, templates, and applications">
+  <meta name="keywords" content="portfolio, marketplace, web templates, projects, buy, sell">
+  <title>Portfolio Marketplace - Premium Web Projects & Templates</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <span>⚡</span>
+        <span>Portfolio Market</span>
+      </a>
+
+      <button class="mobile-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="checkout.html">
+            <div class="cart-icon">
+              🛒
+              <span class="cart-count">0</span>
+            </div>
+          </a></li>
+        <li><a href="admin/index.html" class="btn btn-primary btn-sm">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Premium Web Projects<br>Ready to Launch</h1>
+      <p>Discover and purchase high-quality, production-ready web applications, templates, and components. Built by
+        experts, designed for success.</p>
+
+      <div class="hero-cta">
+        <a href="shop.html" class="btn btn-primary btn-lg">
+          <span>🚀</span>
+          Browse Projects
+        </a>
+        <a href="#featured" class="btn btn-secondary btn-lg">
+          <span>✨</span>
+          View Featured
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section id="featured" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Hand-picked premium projects that deliver exceptional value and quality</p>
+      </div>
+
+      <div class="grid grid-3" id="featured-projects">
+        <!-- Projects will be loaded here by JavaScript -->
+      </div>
+
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="shop.html" class="btn btn-primary btn-lg">View All Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose Us</h2>
+        <p class="section-subtitle">Everything you need to kickstart your next project</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+          <h3>Production Ready</h3>
+          <p>All projects are fully tested, optimized, and ready to deploy. No setup hassles, just download and launch.
+          </p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+          <h3>Modern Design</h3>
+          <p>Beautiful, responsive designs that follow the latest UI/UX trends and best practices.</p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
+          <h3>Full Documentation</h3>
+          <p>Comprehensive documentation and code comments to help you understand and customize every aspect.</p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+          <h3>Secure Code</h3>
+          <p>Built with security in mind, following industry standards and best practices for safe deployment.</p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+          <h3>Performance Optimized</h3>
+          <p>Optimized for speed and efficiency with clean, maintainable code that scales.</p>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">💎</div>
+          <h3>Lifetime Updates</h3>
+          <p>Get free updates and improvements for all purchased projects. Buy once, benefit forever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Browse by Category</h2>
+        <p class="section-subtitle">Find exactly what you're looking for</p>
+      </div>
+
+      <div class="grid grid-4">
+        <a href="shop.html?category=web" class="card" style="text-align: center; cursor: pointer;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🌐</div>
+          <h3>Web Applications</h3>
+          <p>Full-stack web apps and platforms</p>
+        </a>
+
+        <a href="shop.html?category=app" class="card" style="text-align: center; cursor: pointer;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+          <h3>Mobile Apps</h3>
+          <p>Cross-platform mobile solutions</p>
+        </a>
+
+        <a href="shop.html?category=dashboard" class="card" style="text-align: center; cursor: pointer;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+          <h3>Dashboards</h3>
+          <p>Admin panels and analytics</p>
+        </a>
+
+        <a href="shop.html?category=template" class="card" style="text-align: center; cursor: pointer;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+          <h3>Templates</h3>
+          <p>Ready-to-use website templates</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section" style="background: var(--bg-card);">
+    <div class="container">
+      <div class="grid grid-2" style="align-items: center; gap: 4rem;">
+        <div>
+          <h2 style="margin-bottom: 1.5rem;">Built by Developers,<br>For Developers</h2>
+          <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">We understand the challenges of building from scratch.
+            That's why we've created a marketplace of premium, production-ready projects that save you time and help you
+            deliver exceptional results.</p>
+
+          <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span style="color: #43e97b; font-size: 1.5rem;">✓</span>
+              <span>100% Money-back guarantee</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span style="color: #43e97b; font-size: 1.5rem;">✓</span>
+              <span>Instant download access</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span style="color: #43e97b; font-size: 1.5rem;">✓</span>
+              <span>Free lifetime updates</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <span style="color: #43e97b; font-size: 1.5rem;">✓</span>
+              <span>Premium support included</span>
+            </div>
+          </div>
+
+          <a href="shop.html" class="btn btn-primary btn-lg">Start Exploring</a>
+        </div>
+
+        <div class="card" style="padding: 3rem; text-align: center;">
+          <div style="font-size: 4rem; margin-bottom: 1rem;">📈</div>
+          <h3
+            style="font-size: 3rem; margin-bottom: 0.5rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            1000+</h3>
+          <p style="font-size: 1.25rem; margin-bottom: 2rem;">Happy Customers</p>
+
+          <div style="font-size: 4rem; margin-bottom: 1rem;">⭐</div>
+          <h3
+            style="font-size: 3rem; margin-bottom: 0.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            4.9/5</h3>
+          <p style="font-size: 1.25rem;">Average Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section">
+    <div class="container">
+      <div class="card"
+        style="padding: 4rem; text-align: center; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border: 1px solid rgba(102, 126, 234, 0.3);">
+        <h2 style="margin-bottom: 1rem;">Ready to Build Something Amazing?</h2>
+        <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Join thousands of developers who are building faster and better with our premium projects.</p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="shop.html" class="btn btn-primary btn-lg">Browse Projects</a>
+          <a href="admin/index.html" class="btn btn-secondary btn-lg">Sell Your Projects</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Portfolio Market</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Premium web projects and templates for developers
+          and businesses.</p>
+        <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+          <a href="#" style="transition: transform 0.2s;">🐦</a>
+          <a href="#" style="transition: transform 0.2s;">💼</a>
+          <a href="#" style="transition: transform 0.2s;">📘</a>
+          <a href="#" style="transition: transform 0.2s;">📷</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Categories</h3>
+        <ul class="footer-links">
+          <li><a href="shop.html?category=web">Web Applications</a></li>
+          <li><a href="shop.html?category=app">Mobile Apps</a></li>
+          <li><a href="shop.html?category=dashboard">Dashboards</a></li>
+          <li><a href="shop.html?category=template">Templates</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Support</h3>
+        <ul class="footer-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="admin/index.html">Admin Login</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Portfolio Marketplace. All rights reserved. Built with ❤️ for developers.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
+  <script>
+    // Load featured projects on homepage
+    document.addEventListener('DOMContentLoaded', () => {
+      const featuredContainer = document.getElementById('featured-projects');
+      if (featuredContainer && window.shopFunctions) {
+        // Show first 3 projects as featured
+        const featuredProjects = window.shopFunctions.PROJECTS_DATA.slice(0, 3);
+        window.shopFunctions.renderProjects(featuredProjects, 'featured-projects');
+      }
+    });
+  </script>
+</body>
+
+</html>

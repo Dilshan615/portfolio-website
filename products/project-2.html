@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio Website Template - Modern animated portfolio">
+    <title>Portfolio Website Template - Portfolio Marketplace</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <span>⚡</span>
+                <span>Portfolio Market</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../shop.html">Shop</a></li>
+                <li><a href="../index.html#features">Features</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../checkout.html">
+                        <div class="cart-icon">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </div>
+                    </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero" style="min-height: 60vh; padding: 8rem 1.5rem 4rem;">
+        <div class="hero-content">
+            <div
+                style="display: inline-block; padding: 0.5rem 1rem; background: rgba(102, 126, 234, 0.1); border: 1px solid rgba(102, 126, 234, 0.3); border-radius: var(--radius-sm); margin-bottom: 1rem;">
+                <span style="color: #667eea; font-weight: 600;">Template</span>
+            </div>
+            <h1>Portfolio Website Template</h1>
+            <p style="max-width: 700px; margin: 0 auto 2rem;">Modern, animated portfolio template perfect for showcasing
+                your work and skills</p>
+
+            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <div
+                    style="font-size: 2.5rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    $99
+                </div>
+                <button class="btn btn-primary btn-lg" onclick="addToCartFromPage()">
+                    <span>🛒</span> Add to Cart
+                </button>
+                <a href="#" class="btn btn-secondary btn-lg">
+                    <span>👁️</span> Live Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Details -->
+    <section class="section">
+        <div class="container" style="max-width: 1200px;">
+            <!-- Project Image -->
+            <div style="margin-bottom: 3rem;">
+                <img src="../assets/img/project-2.jpg" alt="Portfolio Website Template"
+                    style="width: 100%; height: 500px; object-fit: cover; border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; align-items: start;">
+                <!-- Main Content -->
+                <div>
+                    <h2 style="margin-bottom: 1.5rem;">About This Project</h2>
+                    <p style="font-size: 1.125rem; margin-bottom: 2rem;">
+                        A beautiful, modern portfolio template with smooth animations and dark mode support. Perfect for
+                        designers, developers, and creative professionals looking to showcase their work in style.
+                    </p>
+
+                    <h3 style="margin-bottom: 1rem;">Key Features</h3>
+                    <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+                        <div class="card" style="padding: 1rem; display: flex; align-items: start; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">✓</span>
+                            <div>
+                                <strong>Smooth Animations</strong>
+                                <p style="margin: 0.25rem 0 0; color: var(--text-secondary);">GSAP-powered animations
+                                    for engaging user experience</p>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding: 1rem; display: flex; align-items: start; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">✓</span>
+                            <div>
+                                <strong>Dark Mode</strong>
+                                <p style="margin: 0.25rem 0 0; color: var(--text-secondary);">Built-in dark mode toggle
+                                    for better accessibility</p>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding: 1rem; display: flex; align-items: start; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">✓</span>
+                            <div>
+                                <strong>Contact Form</strong>
+                                <p style="margin: 0.25rem 0 0; color: var(--text-secondary);">Working contact form with
+                                    email integration</p>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding: 1rem; display: flex; align-items: start; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">✓</span>
+                            <div>
+                                <strong>Blog Section</strong>
+                                <p style="margin: 0.25rem 0 0; color: var(--text-secondary);">Optional blog section for
+                                    sharing your thoughts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem;">Technologies Used</h3>
+                    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">GSAP</span>
+                    </div>
+
+                    <h3 style="margin-bottom: 1rem;">What's Included</h3>
+                    <div class="card" style="padding: 1.5rem;">
+                        <ul style="list-style: none; display: grid; gap: 0.75rem;">
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">📦</span> Complete source code
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">📚</span> Setup documentation
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">🎨</span> Customization guide
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">🔄</span> Free updates
+                            </li>
+                            <li style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">💬</span> Email support
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div style="position: sticky; top: 100px;">
+                    <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+                        <h3 style="margin-bottom: 1rem;">Purchase Details</h3>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+                                <span style="color: var(--text-secondary);">Price</span>
+                                <strong
+                                    style="font-size: 1.5rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$99</strong>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color);">
+                                <span style="color: var(--text-secondary);">License</span>
+                                <strong>Regular</strong>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.75rem;">
+                                <span style="color: var(--text-secondary);">Sales</span>
+                                <strong>18</strong>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: 0.75rem;"
+                            onclick="addToCartFromPage()">
+                            <span>🛒</span> Add to Cart
+                        </button>
+
+                        <a href="#" class="btn btn-secondary" style="width: 100%;">
+                            <span>👁️</span> Live Demo
+                        </a>
+                    </div>
+
+                    <div class="card" style="padding: 1.5rem;">
+                        <h3 style="margin-bottom: 1rem;">Support</h3>
+                        <div style="display: grid; gap: 0.75rem; font-size: 0.875rem; color: var(--text-secondary);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">✓</span>
+                                <span>Email support</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">✓</span>
+                                <span>Documentation included</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #43e97b;">✓</span>
+                                <span>Free updates</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Projects -->
+    <section class="section" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Related Projects</h2>
+                <p class="section-subtitle">You might also like these projects</p>
+            </div>
+
+            <div class="grid grid-3" id="related-projects">
+                <!-- Related projects will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Portfolio Marketplace. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/shop.js"></script>
+    <script>
+        const currentProject = {
+            id: 2,
+            title: "Portfolio Website Template",
+            price: 99,
+            image: "../assets/img/project-2.jpg"
+        };
+
+        function addToCartFromPage() {
+            if (window.portfolioMarketplace) {
+                window.portfolioMarketplace.addToCart(currentProject);
+            }
+        }
+
+        // Load related projects
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.shopFunctions) {
+                const relatedProjects = window.shopFunctions.PROJECTS_DATA
+                    .filter(p => p.id !== currentProject.id)
+                    .slice(0, 3);
+                window.shopFunctions.renderProjects(relatedProjects, 'related-projects');
+            }
+        });
+    </script>
+</body>
+
+</html>

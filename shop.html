@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse our collection of premium web projects, templates, and applications">
+    <title>Shop - Portfolio Marketplace</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>⚡</span>
+                <span>Portfolio Market</span>
+            </a>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="checkout.html">
+                        <div class="cart-icon">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </div>
+                    </a></li>
+                <li><a href="admin/index.html" class="btn btn-primary btn-sm">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Shop Section -->
+    <section class="section" style="padding-top: 8rem;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse Projects</h2>
+                <p class="section-subtitle">Find production-ready code for your next idea</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="card mb-4" style="padding: 1.5rem;">
+                <div style="display: grid; grid-template-columns: 1fr 200px; gap: 1rem; align-items: center;">
+                    <div>
+                        <input type="text" id="search-projects" class="form-input" placeholder="🔍 Search projects...">
+                    </div>
+                    <div>
+                        <select id="filter-category" class="form-select">
+                            <option value="all">All Categories</option>
+                            <option value="web">Web Applications</option>
+                            <option value="app">Mobile Apps</option>
+                            <option value="dashboard">Dashboards</option>
+                            <option value="template">Templates</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="mb-4"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <div class="card text-center" style="padding: 1.5rem;">
+                    <div
+                        style="font-size: 2rem; font-weight: 700; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        <span id="project-count">6</span>
+                    </div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Total Projects</div>
+                </div>
+
+                <div class="card text-center" style="padding: 1.5rem;">
+                    <div
+                        style="font-size: 2rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        $99 - $349
+                    </div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Price Range</div>
+                </div>
+
+                <div class="card text-center" style="padding: 1.5rem;">
+                    <div
+                        style="font-size: 2rem; font-weight: 700; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                        ⭐ 4.9
+                    </div>
+                    <div style="color: var(--text-secondary); margin-top: 0.5rem;">Average Rating</div>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid grid-3" id="projects-grid">
+                <!-- Projects will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Empty State (hidden by default) -->
+            <div id="no-results" style="display: none; text-align: center; padding: 4rem 1rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+                <h3 style="margin-bottom: 1rem;">No projects found</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Try adjusting your search or filters</p>
+                <button class="btn btn-primary" onclick="resetFilters()">Reset Filters</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="card text-center"
+                style="padding: 3rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); border: 1px solid rgba(102, 126, 234, 0.2);">
+                <h2 style="margin-bottom: 1rem;">Stay Updated</h2>
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-secondary);">Get notified about
+                    new projects, updates, and exclusive deals</p>
+
+                <form onsubmit="subscribeNewsletter(event)"
+                    style="max-width: 500px; margin: 0 auto; display: flex; gap: 1rem;">
+                    <input type="email" class="form-input" placeholder="Enter your email" required style="flex: 1;">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio Market</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Premium web projects and templates for
+                    developers and businesses.</p>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="#" style="transition: transform 0.2s;">🐦</a>
+                    <a href="#" style="transition: transform 0.2s;">💼</a>
+                    <a href="#" style="transition: transform 0.2s;">📘</a>
+                    <a href="#" style="transition: transform 0.2s;">📷</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html?category=web">Web Applications</a></li>
+                    <li><a href="shop.html?category=app">Mobile Apps</a></li>
+                    <li><a href="shop.html?category=dashboard">Dashboards</a></li>
+                    <li><a href="shop.html?category=template">Templates</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="admin/index.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Portfolio Marketplace. All rights reserved. Built with ❤️ for developers.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script>
+        // Initialize shop page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.shopFunctions) {
+                window.shopFunctions.initShop();
+            }
+
+            // Check for category parameter in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');
+            if (category) {
+                const categoryFilter = document.getElementById('filter-category');
+                if (categoryFilter) {
+                    categoryFilter.value = category;
+                    categoryFilter.dispatchEvent(new Event('change'));
+                }
+            }
+
+            // Update project count
+            updateProjectCount();
+        });
+
+        function updateProjectCount() {
+            const visibleProjects = document.querySelectorAll('.project-card:not([style*="display: none"])');
+            const countEl = document.getElementById('project-count');
+            const noResults = document.getElementById('no-results');
+
+            if (countEl) {
+                countEl.textContent = visibleProjects.length;
+            }
+
+            if (noResults) {
+                noResults.style.display = visibleProjects.length === 0 ? 'block' : 'none';
+            }
+        }
+
+        function resetFilters() {
+            const searchInput = document.getElementById('search-projects');
+            const categoryFilter = document.getElementById('filter-category');
+
+            if (searchInput) searchInput.value = '';
+            if (categoryFilter) categoryFilter.value = 'all';
+
+            if (window.portfolioMarketplace) {
+                window.portfolioMarketplace.filterProjects('', 'all');
+            }
+
+            updateProjectCount();
+        }
+
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('input[type="email"]').value;
+
+            if (window.portfolioMarketplace) {
+                window.portfolioMarketplace.showNotification('Thanks for subscribing! 🎉', 'success');
+            }
+
+            event.target.reset();
+        }
+
+        // Watch for filter changes to update count
+        const observer = new MutationObserver(updateProjectCount);
+        const projectsGrid = document.getElementById('projects-grid');
+        if (projectsGrid) {
+            observer.observe(projectsGrid, {
+                childList: true,
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['style']
+            });
+        }
+    </script>
+</body>
+
+</html>

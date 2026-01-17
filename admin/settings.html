@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Admin Panel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-custom.css">
+</head>
+
+<body class="bg-dark-custom">
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar admin-sidebar collapse" id="sidebarMenu">
+                <div class="position-sticky pt-3">
+                    <div
+                        class="text-center mb-4 pb-3 border-bottom border-secondary d-flex justify-content-between align-items-center px-3 justify-content-md-center">
+                        <h4 class="text-gradient mb-0">
+                            <i class="bi bi-lightning-charge-fill"></i> Admin
+                        </h4>
+                        <button class="btn btn-link text-body d-md-none p-0" onclick="toggleSidebar()">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manage-projects.html">
+                                <i class="bi bi-box-seam me-2"></i> Manage Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="orders.html">
+                                <i class="bi bi-cart-check me-2"></i> Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customers.html">
+                                <i class="bi bi-people me-2"></i> Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="revenue.html">
+                                <i class="bi bi-cash-stack me-2"></i> Revenue
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="analytics.html">
+                                <i class="bi bi-graph-up me-2"></i> Analytics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="settings.html">
+                                <i class="bi bi-gear me-2"></i> Settings
+                            </a>
+                        </li>
+                        <li class="nav-item mt-4 pt-3 border-top border-secondary">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-globe me-2"></i> View Site
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">
+                                <i class="bi bi-box-arrow-right me-2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Header -->
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-secondary">
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="btn btn-dark d-md-none border-secondary" onclick="toggleSidebar()">
+                            <i class="bi bi-list"></i>
+                        </button>
+                        <div>
+                            <h1 class="h2"><i class="bi bi-gear me-2"></i>Settings</h1>
+                            <p class="text-secondary mb-0">Manage your account and application preferences</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Settings Navigation -->
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="list-group list-group-flush">
+                                    <a href="#general" class="list-group-item list-group-item-action active">
+                                        <i class="bi bi-sliders me-2"></i>General
+                                    </a>
+                                    <a href="#appearance" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-palette me-2"></i>Appearance
+                                    </a>
+                                    <a href="#account" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-person me-2"></i>Account
+                                    </a>
+                                    <a href="#notifications" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-bell me-2"></i>Notifications
+                                    </a>
+                                    <a href="#security" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-shield-check me-2"></i>Security
+                                    </a>
+                                    <a href="#payment" class="list-group-item list-group-item-action">
+                                        <i class="bi bi-credit-card me-2"></i>Payment
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Content -->
+                    <div class="col-lg-9">
+                        <!-- General Settings -->
+                        <div class="card mb-4" id="general">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-sliders me-2"></i>General Settings</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Site Name</label>
+                                            <input type="text" class="form-control" value="Portfolio Marketplace">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Site URL</label>
+                                            <input type="url" class="form-control" value="https://example.com">
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Site Description</label>
+                                            <textarea class="form-control"
+                                                rows="3">Premium marketplace for web projects and templates</textarea>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Contact Email</label>
+                                            <input type="email" class="form-control" value="admin@example.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Support Email</label>
+                                            <input type="email" class="form-control" value="support@example.com">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-gradient-primary">
+                                                <i class="bi bi-save me-2"></i>Save Changes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Appearance Settings -->
+                        <div class="card mb-4" id="appearance">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-palette me-2"></i>Appearance</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-4">
+                                    <label class="form-label d-block mb-3">Theme Mode</label>
+                                    <div class="btn-group w-100" role="group">
+                                        <input type="radio" class="btn-check" name="theme" id="theme-light"
+                                            value="light">
+                                        <label class="btn btn-outline-primary" for="theme-light">
+                                            <i class="bi bi-sun me-2"></i>Light Mode
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="theme" id="theme-dark" value="dark"
+                                            checked>
+                                        <label class="btn btn-outline-primary" for="theme-dark">
+                                            <i class="bi bi-moon me-2"></i>Dark Mode
+                                        </label>
+
+                                        <input type="radio" class="btn-check" name="theme" id="theme-auto" value="auto">
+                                        <label class="btn btn-outline-primary" for="theme-auto">
+                                            <i class="bi bi-circle-half me-2"></i>Auto
+                                        </label>
+                                    </div>
+                                    <small class="form-text text-secondary d-block mt-2">
+                                        Choose your preferred theme. Auto mode will match your system settings.
+                                    </small>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Primary Color</label>
+                                    <div class="d-flex gap-2">
+                                        <input type="color" class="form-control form-control-color" id="primary-color"
+                                            value="#667eea" title="Choose primary color"
+                                            onchange="updatePrimaryColor(this.value)">
+                                        <input type="text" class="form-control" id="primary-color-text" value="#667eea"
+                                            readonly>
+                                    </div>
+                                    <small class="form-text text-secondary d-block mt-2">
+                                        Changes will apply to the entire website immediately
+                                    </small>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Secondary Color</label>
+                                    <div class="d-flex gap-2">
+                                        <input type="color" class="form-control form-control-color" id="secondary-color"
+                                            value="#764ba2" title="Choose secondary color"
+                                            onchange="updateSecondaryColor(this.value)">
+                                        <input type="text" class="form-control" id="secondary-color-text"
+                                            value="#764ba2" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Accent Color</label>
+                                    <div class="d-flex gap-2">
+                                        <input type="color" class="form-control form-control-color" id="accent-color"
+                                            value="#4facfe" title="Choose accent color"
+                                            onchange="updateAccentColor(this.value)">
+                                        <input type="text" class="form-control" id="accent-color-text" value="#4facfe"
+                                            readonly>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-outline-danger btn-sm" onclick="resetColors()">
+                                    <i class="bi bi-arrow-counterclockwise me-2"></i>Reset to Default Colors
+                                </button>
+
+                                <div class="mb-4">
+                                    <label class="form-label">Font Size</label>
+                                    <select class="form-select">
+                                        <option>Small</option>
+                                        <option selected>Medium (Default)</option>
+                                        <option>Large</option>
+                                    </select>
+                                </div>
+
+                                <button type="button" class="btn btn-gradient-primary" onclick="saveAppearance()">
+                                    <i class="bi bi-save me-2"></i>Save Appearance
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Account Settings -->
+                        <div class="card mb-4" id="account">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-person me-2"></i>Account Information</h5>
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" value="Admin User">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" value="admin@demo.com">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" placeholder="+1 234 567 8900">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Role</label>
+                                            <input type="text" class="form-control" value="Administrator" readonly>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Bio</label>
+                                            <textarea class="form-control" rows="3"
+                                                placeholder="Tell us about yourself..."></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-gradient-primary">
+                                                <i class="bi bi-save me-2"></i>Update Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Notification Settings -->
+                        <div class="card mb-4" id="notifications">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-bell me-2"></i>Notification Preferences</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="notif-orders" checked>
+                                    <label class="form-check-label" for="notif-orders">
+                                        <strong>New Orders</strong>
+                                        <div class="text-secondary small">Get notified when you receive a new order
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="notif-reviews" checked>
+                                    <label class="form-check-label" for="notif-reviews">
+                                        <strong>New Reviews</strong>
+                                        <div class="text-secondary small">Get notified when customers leave reviews
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="notif-messages">
+                                    <label class="form-check-label" for="notif-messages">
+                                        <strong>Messages</strong>
+                                        <div class="text-secondary small">Get notified about new messages</div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" id="notif-updates" checked>
+                                    <label class="form-check-label" for="notif-updates">
+                                        <strong>System Updates</strong>
+                                        <div class="text-secondary small">Get notified about system updates and
+                                            maintenance</div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check form-switch mb-4">
+                                    <input class="form-check-input" type="checkbox" id="notif-marketing">
+                                    <label class="form-check-label" for="notif-marketing">
+                                        <strong>Marketing Emails</strong>
+                                        <div class="text-secondary small">Receive promotional emails and newsletters
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <button type="button" class="btn btn-gradient-primary">
+                                    <i class="bi bi-save me-2"></i>Save Preferences
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Security Settings -->
+                        <div class="card mb-4" id="security">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-shield-check me-2"></i>Security</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="mb-3">Change Password</h6>
+                                <form class="mb-4">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label class="form-label">Current Password</label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Enter current password">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">New Password</label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Enter new password">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control"
+                                                placeholder="Confirm new password">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-gradient-primary">
+                                                <i class="bi bi-key me-2"></i>Update Password
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <hr class="my-4">
+
+                                <h6 class="mb-3">Two-Factor Authentication</h6>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <p class="mb-1">Add an extra layer of security to your account</p>
+                                        <small class="text-secondary">Status: <span
+                                                class="badge bg-danger">Disabled</span></small>
+                                    </div>
+                                    <button class="btn btn-outline-primary">
+                                        <i class="bi bi-shield-plus me-2"></i>Enable 2FA
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Settings -->
+                        <div class="card mb-4" id="payment">
+                            <div class="card-header">
+                                <h5 class="mb-0"><i class="bi bi-credit-card me-2"></i>Payment Settings</h5>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="mb-3">Payment Methods</h6>
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="payment-stripe" checked>
+                                    <label class="form-check-label" for="payment-stripe">
+                                        <i class="bi bi-credit-card me-2"></i><strong>Stripe</strong>
+                                        <div class="text-secondary small">Accept credit card payments</div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="payment-paypal" checked>
+                                    <label class="form-check-label" for="payment-paypal">
+                                        <i class="bi bi-paypal me-2"></i><strong>PayPal</strong>
+                                        <div class="text-secondary small">Accept PayPal payments</div>
+                                    </label>
+                                </div>
+
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="payment-crypto">
+                                    <label class="form-check-label" for="payment-crypto">
+                                        <i class="bi bi-currency-bitcoin me-2"></i><strong>Cryptocurrency</strong>
+                                        <div class="text-secondary small">Accept Bitcoin and other cryptocurrencies
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <hr class="my-4">
+
+                                <h6 class="mb-3">Tax Settings</h6>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tax Rate (%)</label>
+                                        <input type="number" class="form-control" value="10" min="0" max="100"
+                                            step="0.1">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Currency</label>
+                                        <select class="form-select">
+                                            <option selected>USD ($)</option>
+                                            <option>EUR (€)</option>
+                                            <option>GBP (£)</option>
+                                            <option>JPY (¥)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-gradient-primary mt-3">
+                                    <i class="bi bi-save me-2"></i>Save Payment Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        function saveAppearance() {
+            const selectedTheme = document.querySelector('input[name="theme"]:checked').value;
+            // setTheme is now global from main.js
+            setTheme(selectedTheme);
+
+            // Show success toast
+            const toast = document.createElement('div');
+            toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed top-0 end-0 m-3';
+            toast.setAttribute('role', 'alert');
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-check-circle me-2"></i>Appearance settings saved!
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+        }
+
+        // Color Management
+        function updatePrimaryColor(color) {
+            document.documentElement.style.setProperty('--bs-primary', color);
+            document.getElementById('primary-color-text').value = color;
+            localStorage.setItem('primaryColor', color);
+            // Optional: Update other vars if needed
+        }
+
+        function updateSecondaryColor(color) {
+            document.documentElement.style.setProperty('--bs-secondary', color);
+            document.getElementById('secondary-color-text').value = color;
+            localStorage.setItem('secondaryColor', color);
+        }
+
+        function updateAccentColor(color) {
+            document.documentElement.style.setProperty('--bs-info', color);
+            document.getElementById('accent-color-text').value = color;
+            localStorage.setItem('accentColor', color);
+        }
+
+        function resetColors() {
+            const defaultColors = {
+                primary: '#667eea',
+                secondary: '#764ba2',
+                accent: '#4facfe'
+            };
+
+            updatePrimaryColor(defaultColors.primary);
+            updateSecondaryColor(defaultColors.secondary);
+            updateAccentColor(defaultColors.accent);
+
+            document.getElementById('primary-color').value = defaultColors.primary;
+            document.getElementById('secondary-color').value = defaultColors.secondary;
+            document.getElementById('accent-color').value = defaultColors.accent;
+
+            showColorToast('Colors reset to default!');
+        }
+
+        function showColorToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast align-items-center text-white bg-success border-0 position-fixed top-0 end-0 m-3';
+            toast.setAttribute('role', 'alert');
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <i class="bi bi-palette me-2"></i>${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast, { delay: 2000 });
+            bsToast.show();
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Initialize UI values
+        function initSettingsUI() {
+            // Theme Radio
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const radio = document.getElementById('theme-' + savedTheme);
+            if (radio) radio.checked = true;
+
+            // Colors
+            const primaryColor = localStorage.getItem('primaryColor');
+            const secondaryColor = localStorage.getItem('secondaryColor');
+            const accentColor = localStorage.getItem('accentColor');
+
+            if (primaryColor) {
+                document.getElementById('primary-color').value = primaryColor;
+                document.getElementById('primary-color-text').value = primaryColor;
+            }
+
+            if (secondaryColor) {
+                document.getElementById('secondary-color').value = secondaryColor;
+                document.getElementById('secondary-color-text').value = secondaryColor;
+            }
+
+            if (accentColor) {
+                document.getElementById('accent-color').value = accentColor;
+                document.getElementById('accent-color-text').value = accentColor;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initSettingsUI();
+
+            // Add theme change listeners (immediate preview)
+            document.querySelectorAll('input[name="theme"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    // Use global setTheme which handles everything
+                    setTheme(e.target.value);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Login - Portfolio Marketplace">
+    <title>Admin Login - Portfolio Marketplace</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-custom.css">
+</head>
+
+<body class="bg-dark-custom">
+    <div class="container">
+        <div class="row justify-content-center align-items-center min-vh-100">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <!-- Logo -->
+                        <div class="text-center mb-4">
+                            <div class="display-3 mb-3">
+                                <i class="bi bi-lightning-charge-fill text-gradient"></i>
+                            </div>
+                            <h2 class="mb-2">Admin Login</h2>
+                            <p class="text-secondary">Access your portfolio marketplace dashboard</p>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="login-form" onsubmit="handleLogin(event)">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">
+                                    <i class="bi bi-envelope me-2"></i>Email Address
+                                </label>
+                                <input type="email" class="form-control form-control-lg" id="email" name="email"
+                                    placeholder="admin@example.com" required autocomplete="email">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">
+                                    <i class="bi bi-lock me-2"></i>Password
+                                </label>
+                                <input type="password" class="form-control form-control-lg" id="password"
+                                    name="password" placeholder="Enter your password" required
+                                    autocomplete="current-password">
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                                    <label class="form-check-label text-secondary" for="remember">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <a href="#" class="text-decoration-none">Forgot password?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient-primary btn-lg w-100 mb-3">
+                                <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                            </button>
+
+                            <!-- Demo Credentials -->
+                            <div class="alert alert-info bg-card border-info">
+                                <div class="text-center">
+                                    <strong><i class="bi bi-info-circle me-2"></i>Demo Credentials:</strong>
+                                    <div class="mt-2 font-monospace small">
+                                        <div>Email: admin@demo.com</div>
+                                        <div>Password: admin123</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Back to Website -->
+                        <div class="text-center mt-4 pt-3 border-top border-secondary">
+                            <a href="../index.html" class="text-decoration-none text-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>Back to Website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+
+            // Demo login validation
+            if (email === 'admin@demo.com' && password === 'admin123') {
+                // Save login state
+                const adminUser = {
+                    email: email,
+                    name: 'Admin User',
+                    role: 'admin',
+                    loginTime: new Date().toISOString()
+                };
+
+                localStorage.setItem('adminUser', JSON.stringify(adminUser));
+
+                // Show success message
+                const btn = event.target.querySelector('button[type="submit"]');
+                btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Login Successful!';
+                btn.classList.remove('btn-gradient-primary');
+                btn.classList.add('btn-gradient-success');
+
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                // Show error
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+                alertDiv.innerHTML = `
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <strong>Error!</strong> Invalid credentials. Please try again.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                event.target.insertBefore(alertDiv, event.target.firstChild);
+
+                setTimeout(() => alertDiv.remove(), 3000);
+            }
+        }
+
+        // Check if already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminUser = localStorage.getItem('adminUser');
+            if (adminUser) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+
+</html>

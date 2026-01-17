@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue - Admin Panel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap-custom.css">
+</head>
+
+<body class="bg-dark-custom">
+    <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar admin-sidebar collapse" id="sidebarMenu">
+                <div class="position-sticky pt-3">
+                    <div
+                        class="text-center mb-4 pb-3 border-bottom border-secondary d-flex justify-content-between align-items-center px-3 justify-content-md-center">
+                        <h4 class="text-gradient mb-0">
+                            <i class="bi bi-lightning-charge-fill"></i> Admin
+                        </h4>
+                        <button class="btn btn-link text-body d-md-none p-0" onclick="toggleSidebar()">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="dashboard.html">
+                                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="manage-projects.html">
+                                <i class="bi bi-box-seam me-2"></i> Manage Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="orders.html">
+                                <i class="bi bi-cart-check me-2"></i> Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customers.html">
+                                <i class="bi bi-people me-2"></i> Customers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="revenue.html">
+                                <i class="bi bi-cash-stack me-2"></i> Revenue
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="analytics.html">
+                                <i class="bi bi-graph-up me-2"></i> Analytics
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="settings.html">
+                                <i class="bi bi-gear me-2"></i> Settings
+                            </a>
+                        </li>
+                        <li class="nav-item mt-4 pt-3 border-top border-secondary">
+                            <a class="nav-link" href="../index.html">
+                                <i class="bi bi-globe me-2"></i> View Site
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="logout()">
+                                <i class="bi bi-box-arrow-right me-2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Header -->
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom border-secondary">
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="btn btn-dark d-md-none border-secondary" onclick="toggleSidebar()">
+                            <i class="bi bi-list"></i>
+                        </button>
+                        <div>
+                            <h1 class="h2"><i class="bi bi-cash-stack me-2"></i>Revenue</h1>
+                            <p class="text-secondary mb-0">Track your earnings and financial performance</p>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <select class="form-select form-select-sm">
+                            <option>This Month</option>
+                            <option>Last Month</option>
+                            <option>Last 3 Months</option>
+                            <option>This Year</option>
+                            <option>All Time</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Revenue Stats -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="stat-value">$12,450</div>
+                                    <div class="text-secondary">Total Revenue</div>
+                                </div>
+                                <div class="fs-1 opacity-75">
+                                    <i class="bi bi-cash-stack"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-success-subtle text-success">
+                                    <i class="bi bi-arrow-up"></i> 12.5%
+                                </span>
+                                <small class="text-secondary ms-1">vs last month</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stat-card success">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="stat-value">$8,320</div>
+                                    <div class="text-secondary">This Month</div>
+                                </div>
+                                <div class="fs-1 opacity-75">
+                                    <i class="bi bi-calendar-check"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-success-subtle text-success">
+                                    <i class="bi bi-arrow-up"></i> 8.2%
+                                </span>
+                                <small class="text-secondary ms-1">vs last month</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stat-card info">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="stat-value">$259</div>
+                                    <div class="text-secondary">Avg. Order Value</div>
+                                </div>
+                                <div class="fs-1 opacity-75">
+                                    <i class="bi bi-graph-up-arrow"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-info-subtle text-info">
+                                    <i class="bi bi-arrow-up"></i> 5.1%
+                                </span>
+                                <small class="text-secondary ms-1">vs last month</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="stat-card">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <div class="stat-value">$4,130</div>
+                                    <div class="text-secondary">Pending</div>
+                                </div>
+                                <div class="fs-1 opacity-75">
+                                    <i class="bi bi-hourglass-split"></i>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="badge bg-warning-subtle text-warning">
+                                    <i class="bi bi-dash"></i> 2.3%
+                                </span>
+                                <small class="text-secondary ms-1">vs last month</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Chart -->
+                <div class="row g-3 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Revenue Trend</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center py-5">
+                                    <i class="bi bi-graph-up display-1 text-secondary"></i>
+                                    <p class="text-secondary mt-3">Revenue chart will be displayed here</p>
+                                    <small class="text-muted">(Integrate with Chart.js for visualization)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Revenue by Category</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Web Apps</span>
+                                        <strong>$5,580</strong>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar"
+                                            style="width: 45%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Mobile Apps</span>
+                                        <strong>$3,735</strong>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-info" style="width: 30%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Dashboards</span>
+                                        <strong>$1,867</strong>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" style="width: 15%;"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Templates</span>
+                                        <strong>$1,245</strong>
+                                    </div>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" style="width: 10%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Selling Products -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Top Selling Products</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Category</th>
+                                        <th>Sales</th>
+                                        <th>Revenue</th>
+                                        <th>Growth</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>E-Commerce Platform</strong></td>
+                                        <td><span class="badge bg-primary">Web App</span></td>
+                                        <td>24</td>
+                                        <td><strong>$7,176</strong></td>
+                                        <td><span class="badge bg-success-subtle text-success"><i
+                                                    class="bi bi-arrow-up"></i> 15%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Task Management App</strong></td>
+                                        <td><span class="badge bg-success">Mobile App</span></td>
+                                        <td>12</td>
+                                        <td><strong>$2,388</strong></td>
+                                        <td><span class="badge bg-success-subtle text-success"><i
+                                                    class="bi bi-arrow-up"></i> 12%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Portfolio Template</strong></td>
+                                        <td><span class="badge bg-info">Template</span></td>
+                                        <td>18</td>
+                                        <td><strong>$1,782</strong></td>
+                                        <td><span class="badge bg-success-subtle text-success"><i
+                                                    class="bi bi-arrow-up"></i> 8%</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Social Media Dashboard</strong></td>
+                                        <td><span class="badge bg-warning text-dark">Dashboard</span></td>
+                                        <td>8</td>
+                                        <td><strong>$1,992</strong></td>
+                                        <td><span class="badge bg-danger-subtle text-danger"><i
+                                                    class="bi bi-arrow-down"></i> 3%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Payment Methods</h5>
+                            </div>
+                            <div class="card-body">
+                                <div
+                                    class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom border-secondary">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-credit-card fs-3 me-3 text-primary"></i>
+                                        <div>
+                                            <div><strong>Credit Card</strong></div>
+                                            <small class="text-secondary">65% of transactions</small>
+                                        </div>
+                                    </div>
+                                    <strong>$8,092</strong>
+                                </div>
+
+                                <div
+                                    class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom border-secondary">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-paypal fs-3 me-3 text-info"></i>
+                                        <div>
+                                            <div><strong>PayPal</strong></div>
+                                            <small class="text-secondary">25% of transactions</small>
+                                        </div>
+                                    </div>
+                                    <strong>$3,112</strong>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-currency-bitcoin fs-3 me-3 text-warning"></i>
+                                        <div>
+                                            <div><strong>Cryptocurrency</strong></div>
+                                            <small class="text-secondary">10% of transactions</small>
+                                        </div>
+                                    </div>
+                                    <strong>$1,245</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Monthly Comparison</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>January 2026</span>
+                                        <strong>$8,320</strong>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-success" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>December 2025</span>
+                                        <strong>$7,450</strong>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" style="width: 76%;"></div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>November 2025</span>
+                                        <strong>$6,890</strong>
+                                    </div>
+                                    <div class="progress" style="height: 10px;">
+                                        <div class="progress-bar bg-info" style="width: 70%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script src="../assets/js/main.js"></script>
+
+</body>
+
+</html>

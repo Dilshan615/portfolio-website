@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your purchase - Secure checkout">
+    <title>Checkout - Portfolio Marketplace</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span>⚡</span>
+                <span>Portfolio Market</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="checkout.html">
+                        <div class="cart-icon">
+                            🛒
+                            <span class="cart-count">0</span>
+                        </div>
+                    </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Checkout Section -->
+    <section class="section" style="padding-top: 8rem;">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 3rem;">Checkout</h1>
+
+            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2rem; align-items: start;">
+                <!-- Checkout Form -->
+                <div>
+                    <form id="checkout-form">
+                        <!-- Customer Information -->
+                        <div class="card" style="margin-bottom: 2rem;">
+                            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Customer Information</h2>
+
+                            <div class="form-group">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" name="name" class="form-input" required placeholder="John Doe">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email Address *</label>
+                                <input type="email" name="email" class="form-input" required
+                                    placeholder="john@example.com">
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" name="phone" class="form-input" placeholder="+1 (555) 000-0000">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Company (Optional)</label>
+                                    <input type="text" name="company" class="form-input" placeholder="Company Name">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Billing Address -->
+                        <div class="card" style="margin-bottom: 2rem;">
+                            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Billing Address</h2>
+
+                            <div class="form-group">
+                                <label class="form-label">Address *</label>
+                                <input type="text" name="address" class="form-input" required
+                                    placeholder="123 Main Street">
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">City *</label>
+                                    <input type="text" name="city" class="form-input" required placeholder="New York">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">ZIP Code *</label>
+                                    <input type="text" name="zip" class="form-input" required placeholder="10001">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Country *</label>
+                                <select name="country" class="form-select" required>
+                                    <option value="">Select Country</option>
+                                    <option value="US">United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="FR">France</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="card" style="margin-bottom: 2rem;">
+                            <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Payment Method</h2>
+
+                            <div style="display: grid; gap: 1rem; margin-bottom: 1.5rem;">
+                                <label class="card"
+                                    style="padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem;">
+                                    <input type="radio" name="payment-method" value="credit-card" checked>
+                                    <span>💳 Credit / Debit Card</span>
+                                </label>
+
+                                <label class="card"
+                                    style="padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem;">
+                                    <input type="radio" name="payment-method" value="paypal">
+                                    <span>🅿️ PayPal</span>
+                                </label>
+
+                                <label class="card"
+                                    style="padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem;">
+                                    <input type="radio" name="payment-method" value="crypto">
+                                    <span>₿ Cryptocurrency</span>
+                                </label>
+                            </div>
+
+                            <!-- Credit Card Details -->
+                            <div id="credit-card-details" class="payment-details">
+                                <div class="form-group">
+                                    <label class="form-label">Card Number *</label>
+                                    <input type="text" name="card-number" class="form-input"
+                                        placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                                    <div class="form-group">
+                                        <label class="form-label">Expiry Month *</label>
+                                        <input type="text" name="card-month" class="form-input" placeholder="MM"
+                                            maxlength="2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">Expiry Year *</label>
+                                        <input type="text" name="card-year" class="form-input" placeholder="YY"
+                                            maxlength="2">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">CVV *</label>
+                                        <input type="text" name="card-cvv" class="form-input" placeholder="123"
+                                            maxlength="4">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Cardholder Name *</label>
+                                    <input type="text" name="card-name" class="form-input" placeholder="John Doe">
+                                </div>
+                            </div>
+
+                            <!-- PayPal Details -->
+                            <div id="paypal-details" class="payment-details" style="display: none;">
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;">You will be redirected to
+                                    PayPal to complete your purchase.</p>
+                                <div class="card"
+                                    style="padding: 1rem; background: rgba(0, 48, 135, 0.1); border-color: rgba(0, 48, 135, 0.3);">
+                                    <p style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                                        <span>🔒</span>
+                                        <span>Secure payment powered by PayPal</span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Crypto Details -->
+                            <div id="crypto-details" class="payment-details" style="display: none;">
+                                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Select your preferred
+                                    cryptocurrency:</p>
+                                <div style="display: grid; gap: 0.5rem;">
+                                    <label class="card"
+                                        style="padding: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <input type="radio" name="crypto-type" value="btc">
+                                        <span>Bitcoin (BTC)</span>
+                                    </label>
+                                    <label class="card"
+                                        style="padding: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <input type="radio" name="crypto-type" value="eth">
+                                        <span>Ethereum (ETH)</span>
+                                    </label>
+                                    <label class="card"
+                                        style="padding: 0.75rem; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                                        <input type="radio" name="crypto-type" value="usdt">
+                                        <span>USDT (Tether)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                            <span>🔒</span> Complete Purchase
+                        </button>
+
+                        <p style="text-align: center; color: var(--text-muted); margin-top: 1rem; font-size: 0.875rem;">
+                            🔒 Your payment information is secure and encrypted
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Order Summary -->
+                <div style="position: sticky; top: 100px;">
+                    <div class="card">
+                        <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Order Summary</h2>
+
+                        <div id="cart-items" style="margin-bottom: 1.5rem;">
+                            <!-- Cart items will be loaded here -->
+                        </div>
+
+                        <div style="border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-secondary);">
+                                <span>Subtotal</span>
+                                <span id="cart-subtotal">$0.00</span>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-secondary);">
+                                <span>Tax (10%)</span>
+                                <span id="cart-tax">$0.00</span>
+                            </div>
+
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 0.75rem; color: var(--text-secondary);">
+                                <span>Discount</span>
+                                <span style="color: #43e97b;">-$0.00</span>
+                            </div>
+
+                            <div
+                                style="border-top: 1px solid var(--border-color); padding-top: 1rem; margin-top: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-size: 1.25rem; font-weight: 600;">Total</span>
+                                    <span id="cart-total"
+                                        style="font-size: 1.75rem; font-weight: 700; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                        $0.00
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div
+                            style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                            <div style="display: flex; gap: 0.5rem;">
+                                <input type="text" class="form-input" placeholder="Promo code" style="flex: 1;">
+                                <button type="button" class="btn btn-secondary">Apply</button>
+                            </div>
+                        </div>
+
+                        <!-- Trust Badges -->
+                        <div
+                            style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                            <div
+                                style="display: grid; gap: 0.75rem; font-size: 0.875rem; color: var(--text-secondary);">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #43e97b;">✓</span>
+                                    <span>Instant download access</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #43e97b;">✓</span>
+                                    <span>Lifetime updates included</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #43e97b;">✓</span>
+                                    <span>30-day money-back guarantee</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #43e97b;">✓</span>
+                                    <span>Secure payment processing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>&copy; 2026 Portfolio Marketplace. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.shopFunctions) {
+                window.shopFunctions.initCheckout();
+            }
+        });
+    </script>
+</body>
+
+</html>
