@@ -256,7 +256,7 @@
                 const relatedProjects = window.shopFunctions.PROJECTS_DATA
                     .filter(p => p.id !== currentProject.id)
                     .slice(0, 3);
-                window.shopFunctions.renderProjects(relatedProjects, 'related-projects');
+                window.shopFunctions.renderProjects(relatedProjects, 'related-projects', '../');
             }
         });
     </script>
