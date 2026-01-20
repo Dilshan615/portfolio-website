@@ -16,6 +16,9 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
   <!-- Styles -->
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -242,30 +245,43 @@
           <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">We specialize in building high-quality, scalable
             applications using the industry's leading technologies.</p>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="color: #43e97b; font-size: 1.5rem;">⚡</span>
-              <span>HTML & CSS</span>
+          <div
+            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+            <div class="card tech-card"
+              style="padding: 1rem; text-align: center; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.1);">
+              <i class="bi bi-filetype-html"
+                style="font-size: 2rem; color: #E34F26; margin-bottom: 0.5rem; display: block;"></i>
+              <span style="font-weight: 500;">HTML & CSS</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="color: #43e97b; font-size: 1.5rem;">⚡</span>
-              <span>Bootstrap</span>
+            <div class="card tech-card"
+              style="padding: 1rem; text-align: center; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.1);">
+              <i class="bi bi-bootstrap"
+                style="font-size: 2rem; color: #7952B3; margin-bottom: 0.5rem; display: block;"></i>
+              <span style="font-weight: 500;">Bootstrap</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="color: #43e97b; font-size: 1.5rem;">⚡</span>
-              <span>JavaScript</span>
+            <div class="card tech-card"
+              style="padding: 1rem; text-align: center; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.1);">
+              <i class="bi bi-filetype-js"
+                style="font-size: 2rem; color: #F7DF1E; margin-bottom: 0.5rem; display: block;"></i>
+              <span style="font-weight: 500;">JavaScript</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="color: #43e97b; font-size: 1.5rem;">⚡</span>
-              <span>PHP & MySQL</span>
+            <div class="card tech-card"
+              style="padding: 1rem; text-align: center; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.1);">
+              <i class="bi bi-filetype-php"
+                style="font-size: 2rem; color: #777BB4; margin-bottom: 0.5rem; display: block;"></i>
+              <span style="font-weight: 500;">PHP</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="color: #43e97b; font-size: 1.5rem;">⚡</span>
-              <span>Python</span>
+            <div class="card tech-card"
+              style="padding: 1rem; text-align: center; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.1);">
+              <i class="bi bi-database"
+                style="font-size: 2rem; color: #4479A1; margin-bottom: 0.5rem; display: block;"></i>
+              <span style="font-weight: 500;">MySQL</span>
             </div>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-              <span style="color: #43e97b; font-size: 1.5rem;">⚡</span>
-              <span>Modern Frameworks</span>
+            <div class="card tech-card"
+              style="padding: 1rem; text-align: center; transition: transform 0.2s; border: 1px solid rgba(255,255,255,0.1);">
+              <i class="bi bi-filetype-py"
+                style="font-size: 2rem; color: #3776AB; margin-bottom: 0.5rem; display: block;"></i>
+              <span style="font-weight: 500;">Python</span>
             </div>
           </div>
 
@@ -305,71 +321,10 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Portfolio Market</h3>
-        <p style="color: var(--text-secondary); margin-bottom: 1rem;">Premium web projects and templates for developers
-          and businesses.</p>
-        <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
-          <a href="#" style="transition: transform 0.2s;">🐦</a>
-          <a href="#" style="transition: transform 0.2s;">💼</a>
-          <a href="#" style="transition: transform 0.2s;">📘</a>
-          <a href="#" style="transition: transform 0.2s;">📷</a>
-        </div>
-      </div>
-
-      <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#about">About</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Categories</h3>
-        <ul class="footer-links">
-          <li><a href="shop.html?category=web">Web Applications</a></li>
-          <li><a href="shop.html?category=app">Mobile Apps</a></li>
-          <li><a href="shop.html?category=dashboard">Dashboards</a></li>
-          <li><a href="shop.html?category=template">Templates</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Support</h3>
-        <ul class="footer-links">
-          <li><a href="#">Documentation</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Contact Us</a></li>
-          <li><a href="admin/index.html">Admin Login</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2026 Portfolio Marketplace. All rights reserved. Built with ❤️ for developers.</p>
-    </div>
-  </footer>
+  <footer class="footer"></footer>
 
   <!-- Scripts -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/shop.js"></script>
-  <script>
-    // Load featured projects on homepage
-    document.addEventListener('DOMContentLoaded', () => {
-      const featuredContainer = document.getElementById('featured-projects');
-      if (featuredContainer && window.shopFunctions) {
-        // Show first 3 projects as featured
-        const featuredProjects = window.shopFunctions.PROJECTS_DATA.slice(0, 3);
-        window.shopFunctions.renderProjects(featuredProjects, 'featured-projects');
-      }
-    });
-  </script>
 </body>
 
 </html>

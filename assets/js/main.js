@@ -1,553 +1,620 @@
-// ========================================
-// PORTFOLIO MARKETPLACE - MAIN JAVASCRIPT
-// ========================================
+/**
+ * Portfolio Marketplace - Main JavaScript
+ * Consolidates: shop.js, admin.js, and inline scripts
+ */
+
+// === PROJECT DATA ===
+const DEFAULT_PROJECTS = [
+    {
+        id: 1,
+        title: "E-Commerce Platform",
+        description: "Full-featured online store with payment integration, inventory management, and admin dashboard",
+        price: 299,
+        image: "assets/img/project-1.jpg",
+        category: "web",
+        tech: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
+        features: ["Payment Integration", "Admin Panel", "Responsive Design", "SEO Optimized"],
+        demoUrl: "#",
+        downloadUrl: "#",
+        status: "active"
+    },
+    {
+        id: 2,
+        title: "Task Management App",
+        description: "React-based task manager with drag-and-drop, team collaboration, and real-time updates",
+        price: 199,
+        image: "assets/img/project-2.jpg",
+        category: "app",
+        tech: ["React", "Firebase", "Node.js", "Tailwind"],
+        features: ["Drag & Drop", "Real-time Sync", "Team Chat", "Desktop Notifications"],
+        demoUrl: "#",
+        downloadUrl: "#",
+        status: "active"
+    },
+    {
+        id: 3,
+        title: "Portfolio Template",
+        description: "Modern, high-performance portfolio template for developers and designers",
+        price: 99,
+        image: "assets/img/project-1.jpg",
+        category: "template",
+        tech: ["HTML", "CSS", "JavaScript", "GSAP"],
+        features: ["Smooth Animations", "Dark Mode", "Contact Form", "Mobile Responsive"],
+        demoUrl: "#",
+        downloadUrl: "#",
+        status: "active"
+    },
+    {
+        id: 4,
+        title: "Social Media Dashboard",
+        description: "Comprehensive analytics dashboard for social media management",
+        price: 249,
+        image: "assets/img/project-2.jpg",
+        category: "dashboard",
+        tech: ["Vue.js", "Chart.js", "Express", "PostgreSQL"],
+        features: ["Data Visualization", "Export Reports", "User Roles", "API Integration"],
+        demoUrl: "#",
+        downloadUrl: "#",
+        status: "active"
+    },
+    {
+        id: 5,
+        title: "Fitness Tracker App",
+        description: "Mobile-first fitness application with workout plans and progress tracking",
+        price: 149,
+        image: "assets/img/project-1.jpg",
+        category: "app",
+        tech: ["React Native", "MongoDB", "Express", "Node.js"],
+        features: ["Workout Logs", "GPS Tracking", "Social Sharing", "Health App Sync"],
+        demoUrl: "#",
+        downloadUrl: "#",
+        status: "active"
+    },
+    {
+        id: 6,
+        title: "Learning Management System",
+        description: "Complete LMS platform for online courses and student management",
+        price: 349,
+        image: "assets/img/project-2.jpg",
+        category: "web",
+        tech: ["Next.js", "Prisma", "AWS", "Stripe"],
+        features: ["Video Streaming", "Quiz System", "Certificates", "Student Dashboard"],
+        demoUrl: "#",
+        downloadUrl: "#",
+        status: "active"
+    }
+];
+
+// Load projects from localStorage or use defaults
+let PROJECTS_DATA = JSON.parse(localStorage.getItem('products')) || DEFAULT_PROJECTS;
+
+// Persist projects to localStorage if not already there
+if (!localStorage.getItem('products')) {
+    localStorage.setItem('products', JSON.stringify(PROJECTS_DATA));
+}
 
 // === GLOBAL STATE ===
 const state = {
-    cart: JSON.parse(localStorage.getItem('cart')) || [],
-    user: JSON.parse(localStorage.getItem('user')) || null
+    cart: JSON.parse(localStorage.getItem('cart') || '[]'),
 };
 
-// === NAVIGATION SCROLL EFFECT ===
-function initNavbar() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+// === ADMIN PROJECT MANAGEMENT ===
+function saveProject(projectData, isEdit = false) {
+    if (isEdit) {
+        const index = PROJECTS_DATA.findIndex(p => p.id === projectData.id);
+        if (index !== -1) {
+            PROJECTS_DATA[index] = { ...PROJECTS_DATA[index], ...projectData };
         }
-    });
-
-    // Set active nav link
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// === MOBILE MENU ===
-function initMobileMenu() {
-    const mobileToggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (!mobileToggle || !navLinks) return;
-
-    mobileToggle.addEventListener('click', () => {
-        mobileToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-
-        // Prevent scrolling when menu is open
-        if (navLinks.classList.contains('active')) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-    });
-
-    // Close menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileToggle.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    });
-}
-
-// === CART MANAGEMENT ===
-function updateCartCount() {
-    const cartCount = document.querySelector('.cart-count');
-    if (cartCount) {
-        const totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCount.textContent = totalItems;
-        cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+    } else {
+        const newProject = {
+            ...projectData,
+            id: PROJECTS_DATA.length > 0 ? Math.max(...PROJECTS_DATA.map(p => p.id)) + 1 : 1
+        };
+        PROJECTS_DATA.push(newProject);
     }
+    localStorage.setItem('products', JSON.stringify(PROJECTS_DATA));
+    showNotification(isEdit ? 'Project updated!' : 'Project added!', 'success');
 }
 
-function addToCart(project) {
-    const existingItem = state.cart.find(item => item.id === project.id);
-
-    if (existingItem) {
-        showNotification('This project is already in your cart!', 'info');
-        return;
-    }
-
-    state.cart.push({
-        id: project.id,
-        title: project.title,
-        price: project.price,
-        image: project.image,
-        quantity: 1
-    });
-
-    localStorage.setItem('cart', JSON.stringify(state.cart));
-    updateCartCount();
-    showNotification('Added to cart successfully!', 'success');
-}
-
-function removeFromCart(projectId) {
-    state.cart = state.cart.filter(item => item.id !== projectId);
-    localStorage.setItem('cart', JSON.stringify(state.cart));
-    updateCartCount();
-    showNotification('Removed from cart', 'info');
-}
-
-function clearCart() {
-    state.cart = [];
-    localStorage.setItem('cart', JSON.stringify(state.cart));
-    updateCartCount();
-}
-
-function getCartTotal() {
-    return state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+function deleteProject(id) {
+    PROJECTS_DATA = PROJECTS_DATA.filter(p => p.id !== id);
+    localStorage.setItem('products', JSON.stringify(PROJECTS_DATA));
+    showNotification('Project deleted!', 'success');
 }
 
 // === NOTIFICATION SYSTEM ===
-function showNotification(message, type = 'info') {
-    // Remove existing notification
-    const existing = document.querySelector('.notification');
-    if (existing) existing.remove();
-
+function showNotification(message, type = 'primary') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
-    <div class="notification-content">
-      <span class="notification-icon">${getNotificationIcon(type)}</span>
-      <span class="notification-message">${message}</span>
-    </div>
-  `;
-
-    // Add styles
-    Object.assign(notification.style, {
-        position: 'fixed',
-        top: '100px',
-        right: '20px',
-        padding: '1rem 1.5rem',
-        background: type === 'success' ? 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' :
-            type === 'error' ? 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)' :
-                'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white',
-        borderRadius: '12px',
-        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
-        zIndex: '9999',
-        animation: 'slideInRight 0.3s ease',
-        fontWeight: '500'
-    });
-
+        <div class="notification-content">
+            <span class="notification-icon">${type === 'success' ? '✅' : 'ℹ️'}</span>
+            <span class="notification-message">${message}</span>
+        </div>
+    `;
     document.body.appendChild(notification);
 
+    // Fade in
+    setTimeout(() => notification.classList.add('show'), 10);
+
+    // Remove after 3 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
+        notification.classList.remove('show');
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
 
-function getNotificationIcon(type) {
-    switch (type) {
-        case 'success': return '✓';
-        case 'error': return '✕';
-        case 'info': return 'ℹ';
-        default: return '•';
-    }
+// === CART FUNCTIONS ===
+function updateCartCount() {
+    const counts = document.querySelectorAll('.cart-count');
+    const totalItems = state.cart.reduce((sum, item) => sum + item.quantity, 0);
+    counts.forEach(el => el.textContent = totalItems);
 }
 
-// Add notification animations to document
-if (!document.querySelector('#notification-styles')) {
-    const style = document.createElement('style');
-    style.id = 'notification-styles';
-    style.textContent = `
-    @keyframes slideInRight {
-      from {
-        transform: translateX(400px);
-        opacity: 0;
-      }
-      to {
-        transform: translateX(0);
-        opacity: 1;
-      }
+function addToCart(projectOrId) {
+    let project;
+    if (typeof projectOrId === 'object') {
+        project = projectOrId;
+    } else {
+        project = PROJECTS_DATA.find(p => p.id === projectOrId);
     }
-    @keyframes slideOutRight {
-      from {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      to {
-        transform: translateX(400px);
-        opacity: 0;
-      }
-    }
-    .notification-content {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .notification-icon {
-      font-size: 1.25rem;
-      font-weight: bold;
-    }
-  `;
-    document.head.appendChild(style);
-}
 
-// === MODAL MANAGEMENT ===
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
+    if (!project) return;
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
+    const existingItem = state.cart.find(item => item.id === project.id);
 
-// Close modal on outside click
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('modal')) {
-        closeModal(e.target.id);
-    }
-});
-
-// Close modal on escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        document.querySelectorAll('.modal.active').forEach(modal => {
-            closeModal(modal.id);
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        state.cart.push({
+            id: project.id,
+            title: project.title,
+            price: project.price,
+            image: project.image,
+            quantity: 1
         });
     }
-});
 
-// === SMOOTH SCROLL ===
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-}
-
-// === INTERSECTION OBSERVER FOR ANIMATIONS ===
-function initScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.card, .project-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-}
-
-// === SEARCH AND FILTER ===
-function filterProjects(searchTerm, category = 'all') {
-    const projects = document.querySelectorAll('.project-card');
-
-    projects.forEach(project => {
-        const title = project.querySelector('.project-title')?.textContent.toLowerCase() || '';
-        const description = project.querySelector('.project-description')?.textContent.toLowerCase() || '';
-        const projectCategory = project.dataset.category?.toLowerCase() || '';
-
-        const matchesSearch = title.includes(searchTerm.toLowerCase()) ||
-            description.includes(searchTerm.toLowerCase());
-        const matchesCategory = category === 'all' || projectCategory === category;
-
-        if (matchesSearch && matchesCategory) {
-            project.style.display = '';
-            setTimeout(() => {
-                project.style.opacity = '1';
-                project.style.transform = 'translateY(0)';
-            }, 10);
-        } else {
-            project.style.opacity = '0';
-            project.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                project.style.display = 'none';
-            }, 300);
-        }
-    });
-}
-
-// === FORM VALIDATION ===
-function validateForm(formId) {
-    const form = document.getElementById(formId);
-    if (!form) return false;
-
-    let isValid = true;
-    const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
-
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = '#f5576c';
-
-            // Remove error styling on input
-            input.addEventListener('input', function () {
-                this.style.borderColor = '';
-            }, { once: true });
-        }
-    });
-
-    // Email validation
-    const emailInputs = form.querySelectorAll('input[type="email"]');
-    emailInputs.forEach(input => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (input.value && !emailRegex.test(input.value)) {
-            isValid = false;
-            input.style.borderColor = '#f5576c';
-            showNotification('Please enter a valid email address', 'error');
-        }
-    });
-
-    if (!isValid) {
-        showNotification('Please fill in all required fields', 'error');
-    }
-
-    return isValid;
-}
-
-// === LOCAL STORAGE HELPERS ===
-function saveToLocalStorage(key, data) {
-    try {
-        localStorage.setItem(key, JSON.stringify(data));
-        return true;
-    } catch (e) {
-        console.error('Error saving to localStorage:', e);
-        return false;
-    }
-}
-
-function getFromLocalStorage(key, defaultValue = null) {
-    try {
-        const item = localStorage.getItem(key);
-        return item ? JSON.parse(item) : defaultValue;
-    } catch (e) {
-        console.error('Error reading from localStorage:', e);
-        return defaultValue;
-    }
-}
-
-// === FORMAT CURRENCY ===
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD'
-    }).format(amount);
-}
-
-// === COPY TO CLIPBOARD ===
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        showNotification('Copied to clipboard!', 'success');
-    }).catch(() => {
-        showNotification('Failed to copy', 'error');
-    });
-}
-
-// === DEBOUNCE UTILITY ===
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// === LOADING SPINNER ===
-function showLoading(element) {
-    if (!element) return;
-    element.classList.add('loading');
-    element.style.pointerEvents = 'none';
-}
-
-function hideLoading(element) {
-    if (!element) return;
-    element.classList.remove('loading');
-    element.style.pointerEvents = '';
-}
-
-// === INITIALIZE ON PAGE LOAD ===
-document.addEventListener('DOMContentLoaded', () => {
-    initNavbar();
-    initMobileMenu();
+    localStorage.setItem('cart', JSON.stringify(state.cart));
     updateCartCount();
-    initSmoothScroll();
+    showNotification(`Added ${project.title} to cart!`, 'success');
+}
 
-    // Load saved colors from admin settings
-    loadSavedColors();
-    initTheme();
+// === RENDER PROJECTS ===
+function renderProjects(projects, containerId, pathPrefix = '') {
+    const container = document.getElementById(containerId);
+    if (!container) return;
 
-    // Delay scroll animations slightly for better performance
-    setTimeout(() => {
-        initScrollAnimations();
-    }, 100);
+    container.innerHTML = projects.map(project => `
+        <div class="card project-card" data-category="${project.category}">
+            <div class="project-image">
+                <img src="${pathPrefix}${project.image}" alt="${project.title}">
+                <div class="project-category">${project.category.toUpperCase()}</div>
+                <div class="project-overlay">
+                    <button class="btn btn-primary" onclick="window.shopFunctions.addProjectToCart(${project.id})">
+                        <span>🛒</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="project-info">
+                <h3>${project.title}</h3>
+                <p>${project.description.substring(0, 80)}...</p>
+                <div class="project-tech">
+                    ${project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+                </div>
+                <div class="project-footer">
+                    <div class="project-price">$${project.price}</div>
+                    <a href="${pathPrefix}products/project-1.html" class="btn btn-secondary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
 
-    // Add ripple effect to buttons
-    document.querySelectorAll('.btn').forEach(button => {
-        button.addEventListener('click', function (e) {
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
+// === SUCCESS PAGE LOGIC ===
+function initSuccessPage() {
+    const orderContainer = document.getElementById('order-details');
+    if (!orderContainer) return;
 
-            ripple.style.cssText = `
-        position: absolute;
-        width: ${size}px;
-        height: ${size}px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
-        left: ${x}px;
-        top: ${y}px;
-        pointer-events: none;
-        transform: scale(0);
-        animation: ripple 0.6s ease-out;
-      `;
+    // Simulate getting last order
+    const lastOrder = {
+        orderId: Math.random().toString(36).substr(2, 9).toUpperCase(),
+        date: new Date().toISOString(),
+        total: state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+        items: state.cart.length > 0 ? state.cart : [PROJECTS_DATA[0]] // Mock if cart empty
+    };
 
-            this.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-        });
-    });
+    orderContainer.innerHTML = `
+        <div class="card text-center success-animation" style="padding: 3rem; margin-bottom: 2rem; border-color: var(--success-gradient);">
+            <div style="font-size: 5rem; margin-bottom: 1.5rem;">🎉</div>
+            <h1 style="margin-bottom: 1rem;">Order Successful!</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Thank you for your purchase. Your payment has been processed successfully.</p>
+            
+            <div style="display: inline-flex; gap: 2rem; padding: 1.5rem; background: rgba(67, 233, 123, 0.05); border-radius: var(--radius-lg); border: 1px solid rgba(67, 233, 123, 0.2);">
+                <div style="text-align: left;">
+                    <div style="color: var(--text-secondary); font-size: 0.875rem;">Order ID</div>
+                    <div style="font-weight: 700;">#${lastOrder.orderId}</div>
+                </div>
+                <div style="text-align: left;">
+                    <div style="color: var(--text-secondary); font-size: 0.875rem;">Date</div>
+                    <div style="font-weight: 700;">${new Date(lastOrder.date).toLocaleDateString()}</div>
+                </div>
+            </div>
+        </div>
 
-    // Add ripple animation
-    if (!document.querySelector('#ripple-animation')) {
-        const style = document.createElement('style');
-        style.id = 'ripple-animation';
-        style.textContent = `
-      @keyframes ripple {
-        to {
-          transform: scale(2);
-          opacity: 0;
-        }
-      }
+        <div class="card" style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1.5rem;">Purchased Items</h3>
+            ${lastOrder.items.map(item => `
+                <div style="display: flex; justify-content: space-between; padding: 1rem 0; border-bottom: 1px solid var(--border-color);">
+                    <span>${item.title}</span>
+                    <span style="font-weight: 700;">$${item.price.toFixed(2)}</span>
+                </div>
+            `).join('')}
+            <div style="display: flex; justify-content: space-between; padding: 1.5rem 0; font-size: 1.25rem; font-weight: 700;">
+                <span>Total Paid</span>
+                <span style="background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$${lastOrder.total.toFixed(2)}</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="margin-bottom: 1rem;">Download Your Projects</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">Your download links are ready. You can also access them anytime from your email.</p>
+            ${lastOrder.items.map(item => `
+                <button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;" onclick="window.shopFunctions.downloadProject(${item.id})">
+                    <span>📥</span> Download ${item.title}
+                </button>
+            `).join('')}
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="shop.html" class="btn btn-secondary">Continue Shopping</a>
+        </div>
     `;
-        document.head.appendChild(style);
-    }
-});
 
-// === LOAD SAVED COLORS ===
-// === LOAD SAVED COLORS ===
-function loadSavedColors() {
-    const primaryColor = localStorage.getItem('primaryColor');
-    const secondaryColor = localStorage.getItem('secondaryColor');
-    const accentColor = localStorage.getItem('accentColor');
+    createConfetti();
+}
 
-    if (primaryColor) {
-        document.documentElement.style.setProperty('--bs-primary', primaryColor);
-        // Also update the custom property if needed, though usually vars cascade
-    }
-
-    if (secondaryColor) {
-        document.documentElement.style.setProperty('--bs-secondary', secondaryColor);
-    }
-
-    if (accentColor) {
-        document.documentElement.style.setProperty('--bs-info', accentColor);
+function createConfetti() {
+    const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#43e97b', '#38f9d7'];
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }, i * 30);
     }
 }
 
-// === THEME MANAGEMENT ===
-function setTheme(theme) {
-    const html = document.documentElement;
-    const body = document.body;
+function downloadProject(id) {
+    showNotification('Download started!', 'success');
+}
 
-    // Handle Auto
-    if (theme === 'auto') {
-        localStorage.setItem('theme', 'auto');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(prefersDark ? 'dark' : 'light');
+// === SHOP LOGIC ===
+function initShop() {
+    renderProjects(PROJECTS_DATA, 'projects-grid');
+
+    const searchInput = document.getElementById('search-projects');
+    const categoryFilter = document.getElementById('filter-category');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            filterProjects(e.target.value, categoryFilter ? categoryFilter.value : 'all');
+        });
+    }
+
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', (e) => {
+            filterProjects(searchInput ? searchInput.value : '', e.target.value);
+        });
+    }
+}
+
+function filterProjects(searchTerm, category) {
+    const projects = PROJECTS_DATA.filter(project => {
+        const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                             project.description.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesCategory = category === 'all' || project.category === category;
+        return matchesSearch && matchesCategory;
+    });
+
+    renderProjects(projects, 'projects-grid');
+    updateProjectCount();
+}
+
+function updateProjectCount() {
+    const countEl = document.getElementById('project-count');
+    const noResults = document.getElementById('no-results');
+    const projectsGrid = document.getElementById('projects-grid');
+    
+    if (projectsGrid) {
+        const visibleProjects = projectsGrid.children.length;
+        if (countEl) countEl.textContent = visibleProjects;
+        if (noResults) noResults.style.display = visibleProjects === 0 ? 'block' : 'none';
+    }
+}
+
+// === CHECKOUT LOGIC ===
+function initCheckout() {
+    renderCartItems();
+    updateCartSummary();
+
+    // Payment method toggle logic
+    const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+    paymentMethods.forEach(method => {
+        method.addEventListener('change', (e) => {
+            const allDetails = document.querySelectorAll('.payment-details');
+            allDetails.forEach(d => d.style.display = 'none');
+            
+            const selectedDetails = document.getElementById(`${e.target.value}-details`);
+            if (selectedDetails) {
+                selectedDetails.style.display = 'block';
+            }
+        });
+    });
+
+    // Form submission
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, this would process the payment
+            showNotification('Order placed successfully! Redirecting...', 'success');
+            localStorage.removeItem('cart');
+            setTimeout(() => {
+                window.location.href = 'success.html';
+            }, 2000);
+        });
+    }
+}
+
+function renderCartItems() {
+    const container = document.getElementById('cart-items-container');
+    if (!container) return;
+
+    if (state.cart.length === 0) {
+        container.innerHTML = `
+            <div style="text-align: center; padding: 3rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🛒</div>
+                <h3>Your cart is empty</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 2rem;">Browse our projects and find something amazing!</p>
+                <a href="shop.html" class="btn btn-primary">Go to Shop</a>
+            </div>
+        `;
         return;
     }
 
-    // Save preference
+    container.innerHTML = state.cart.map((item, index) => `
+        <div class="card" style="padding: 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <img src="${item.image}" alt="${item.title}" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-md);">
+                <div style="flex: 1;">
+                    <h4 style="margin: 0;">${item.title}</h4>
+                    <div style="color: var(--text-secondary); font-size: 0.875rem;">Quantity: ${item.quantity}</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-weight: 700; color: var(--text-primary);">$${(item.price * item.quantity).toFixed(2)}</div>
+                    <button class="btn btn-sm" style="color: #ff4d4d; padding: 0.25rem 0;" onclick="window.shopFunctions.removeCartItem(${index})">Remove</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function removeCartItem(index) {
+    state.cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(state.cart));
+    renderCartItems();
+    updateCartSummary();
+    updateCartCount();
+}
+
+function updateCartSummary() {
+    const subtotalEl = document.getElementById('cart-subtotal');
+    const totalEl = document.getElementById('cart-total');
+    
+    const subtotal = state.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `$${subtotal.toFixed(2)}`;
+}
+
+// === FOOTER COMPONENT ===
+function renderFooter() {
+    const footerElement = document.querySelector('footer.footer');
+    if (!footerElement) return;
+
+    // Create a container if it doesn't exist to prevent double rendering
+    if (footerElement.id === 'global-footer-rendered') return;
+    
+    footerElement.id = 'global-footer-rendered';
+    footerElement.innerHTML = `
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Portfolio Market</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Premium web projects and templates for developers and businesses.</p>
+                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                    <a href="#" style="transition: transform 0.2s;">🐦</a>
+                    <a href="#" style="transition: transform 0.2s;">💼</a>
+                    <a href="#" style="transition: transform 0.2s;">📘</a>
+                    <a href="#" style="transition: transform 0.2s;">📷</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Categories</h3>
+                <ul class="footer-links">
+                    <li><a href="shop.html?category=web">Web Applications</a></li>
+                    <li><a href="shop.html?category=app">Mobile Apps</a></li>
+                    <li><a href="shop.html?category=dashboard">Dashboards</a></li>
+                    <li><a href="shop.html?category=template">Templates</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="admin/index.html">Admin Login</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Portfolio Marketplace. All rights reserved. Built with ❤️ by Dilshan.</p>
+        </div>
+    `;
+}
+
+// === ADMIN AUTH ===
+function checkAuth() {
+    const adminUser = localStorage.getItem('adminUser');
+    const path = window.location.pathname;
+    const isLoginPage = path.includes('admin/index.html') || path.endsWith('/admin/') || path.endsWith('/admin');
+    
+    if (!adminUser && !isLoginPage && path.includes('/admin/')) {
+        window.location.href = '../admin/index.html';
+        return null;
+    }
+    return adminUser ? JSON.parse(adminUser) : null;
+}
+
+function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+        localStorage.removeItem('adminUser');
+        window.location.href = '../index.html';
+    }
+}
+
+function toggleSidebar() {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.querySelector('.sidebar-overlay');
+    if (sidebar) sidebar.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+}
+
+function initAdminTableSearch(inputId, tableBodyId) {
+    const input = document.getElementById(inputId);
+    const tbody = document.getElementById(tableBodyId);
+    if (!input || !tbody) return;
+
+    input.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        Array.from(tbody.rows).forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(term) ? '' : 'none';
+        });
+    });
+}
+
+// === THEME & COLORS ===
+function setTheme(theme) {
+    if (theme === 'auto') {
+        const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        theme = darkQuery.matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-bs-theme', theme);
     localStorage.setItem('theme', theme);
-    applyTheme(theme);
 }
 
-function applyTheme(theme) {
-    const html = document.documentElement;
-    const body = document.body;
+function applyPersistedColors() {
+    const primary = localStorage.getItem('primaryColor');
+    const secondary = localStorage.getItem('secondaryColor');
+    const accent = localStorage.getItem('accentColor');
 
-    if (theme === 'light') {
-        html.setAttribute('data-bs-theme', 'light');
-        // Handle admin panel specific classes if they exist
-        if (body.classList.contains('bg-dark-custom')) {
-            body.classList.remove('bg-dark-custom');
-            body.classList.add('bg-light');
-        }
-    } else {
-        html.setAttribute('data-bs-theme', 'dark');
-        // Handle admin panel specific classes
-        if (body.classList.contains('bg-light')) {
-            body.classList.remove('bg-light');
-            body.classList.add('bg-dark-custom');
-        } else if (!body.classList.contains('bg-dark-custom') && (window.location.pathname.includes('/admin/') || document.querySelector('.admin-container'))) {
-            // Add it if we are in admin and don't have it (initial load state)
-            body.classList.add('bg-dark-custom');
-        }
-    }
+    if (primary) document.documentElement.style.setProperty('--bs-primary', primary);
+    if (secondary) document.documentElement.style.setProperty('--bs-secondary', secondary);
+    if (accent) document.documentElement.style.setProperty('--bs-info', accent);
 }
 
-function initTheme() {
+// === INITIALIZATION ===
+document.addEventListener('DOMContentLoaded', () => {
+    // Global initializations
+    updateCartCount();
+    renderFooter();
+    applyPersistedColors();
+    
     const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'auto') {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(prefersDark ? 'dark' : 'light');
-    } else {
-        applyTheme(savedTheme);
+    setTheme(savedTheme);
+    
+    checkAuth();
+
+    // Mobile menu toggle
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileToggle.classList.toggle('active');
+        });
     }
-}
 
+    // Homepage logic
+    const featuredContainer = document.getElementById('featured-projects');
+    if (featuredContainer) {
+        const featuredProjects = PROJECTS_DATA.slice(0, 3);
+        renderProjects(featuredProjects, 'featured-projects');
+    }
 
-// === EXPORT FOR USE IN OTHER FILES ===
+    // Shop logic
+    if (document.getElementById('projects-grid')) {
+        initShop();
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category');
+        if (category) {
+            const categoryFilter = document.getElementById('filter-category');
+            if (categoryFilter) {
+                categoryFilter.value = category;
+                filterProjects('', category);
+            }
+        }
+    }
+
+    // Checkout logic
+    if (document.getElementById('cart-items-container')) {
+        initCheckout();
+    }
+
+    // Success Page logic
+    if (document.getElementById('order-details')) {
+        initSuccessPage();
+    }
+});
+
+// Expose globals for backward compatibility/inline scripts
+window.toggleSidebar = toggleSidebar;
+window.logout = logout;
+window.checkAuth = checkAuth;
+window.setTheme = setTheme;
+
+// === EXPORT SHOP FUNCTIONS ===
+window.shopFunctions = {
+    addProjectToCart: addToCart,
+    initShop,
+    initCheckout,
+    removeCartItem,
+    PROJECTS_DATA,
+    saveProject,
+    deleteProject
+};
+
 window.portfolioMarketplace = {
-    addToCart,
-    removeFromCart,
-    clearCart,
-    getCartTotal,
+    updateCartCount,
     showNotification,
-    openModal,
-    closeModal,
     filterProjects,
-    validateForm,
-    formatCurrency,
-    copyToClipboard,
-    debounce,
-    showLoading,
-    hideLoading,
-    setTheme,
-    applyTheme,
-    state
+    initAdminTableSearch,
+    addToCart
 };

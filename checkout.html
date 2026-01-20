@@ -27,6 +27,12 @@
                 <span>Portfolio Market</span>
             </a>
 
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="shop.html">Shop</a></li>
@@ -47,7 +53,7 @@
         <div class="container">
             <h1 style="text-align: center; margin-bottom: 3rem;">Checkout</h1>
 
-            <div style="display: grid; grid-template-columns: 1fr 400px; gap: 2rem; align-items: start;">
+            <div class="checkout-grid">
                 <!-- Checkout Form -->
                 <div>
                     <form id="checkout-form">
@@ -57,19 +63,19 @@
 
                             <div class="form-group">
                                 <label class="form-label">Full Name *</label>
-                                <input type="text" name="name" class="form-input" required placeholder="Dilshan">
+                                <input type="text" name="name" class="form-input" required placeholder="John Doe">
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">Email Address *</label>
                                 <input type="email" name="email" class="form-input" required
-                                    placeholder="dilshan0763126293@gmail.com">
+                                    placeholder="john@example.com">
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-grid-2">
                                 <div class="form-group">
                                     <label class="form-label">Phone</label>
-                                    <input type="tel" name="phone" class="form-input" placeholder="0703026293">
+                                    <input type="tel" name="phone" class="form-input" placeholder="+1 (555) 000-0000">
                                 </div>
 
                                 <div class="form-group">
@@ -89,7 +95,7 @@
                                     placeholder="123 Main Street">
                             </div>
 
-                            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+                            <div class="form-grid-2">
                                 <div class="form-group">
                                     <label class="form-label">City *</label>
                                     <input type="text" name="city" class="form-input" required placeholder="New York">
@@ -148,7 +154,7 @@
                                         placeholder="1234 5678 9012 3456" maxlength="19">
                                 </div>
 
-                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                                <div class="form-grid-3">
                                     <div class="form-group">
                                         <label class="form-label">Expiry Month *</label>
                                         <input type="text" name="card-month" class="form-input" placeholder="MM"
@@ -223,7 +229,7 @@
                 </div>
 
                 <!-- Order Summary -->
-                <div style="position: sticky; top: 100px;">
+                <div class="checkout-summary" style="position: sticky; top: 100px;">
                     <div class="card">
                         <h2 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Order Summary</h2>
 
@@ -300,23 +306,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-bottom">
-            <p>&copy; 2026 Portfolio Marketplace. All rights reserved.</p>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/shop.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.shopFunctions) {
-                window.shopFunctions.initCheckout();
-            }
-        });
-    </script>
 </body>
 
 </html>

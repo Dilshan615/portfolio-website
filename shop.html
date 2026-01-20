@@ -59,7 +59,7 @@
 
             <!-- Filters -->
             <div class="card mb-4" style="padding: 1.5rem;">
-                <div style="display: grid; grid-template-columns: 1fr 200px; gap: 1rem; align-items: center;">
+                <div class="shop-filters">
                     <div>
                         <input type="text" id="search-projects" class="form-input" placeholder="🔍 Search projects...">
                     </div>
@@ -127,142 +127,18 @@
                 <p style="font-size: 1.125rem; margin-bottom: 2rem; color: var(--text-secondary);">Get notified about
                     new projects, updates, and exclusive deals</p>
 
-                <form onsubmit="subscribeNewsletter(event)"
-                    style="max-width: 500px; margin: 0 auto; display: flex; gap: 1rem;">
-                    <input type="email" class="form-input" placeholder="Enter your email" required style="flex: 1;">
+                <form onsubmit="subscribeNewsletter(event)" class="newsletter-form" <input type="email"
+                    class="form-input" placeholder="Enter your email" required style="flex: 1;">
                     <button type="submit" class="btn btn-primary">Subscribe</button>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Portfolio Market</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Premium web projects and templates for
-                    developers and businesses.</p>
-                <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
-                    <a href="#" style="transition: transform 0.2s;">🐦</a>
-                    <a href="#" style="transition: transform 0.2s;">💼</a>
-                    <a href="#" style="transition: transform 0.2s;">📘</a>
-                    <a href="#" style="transition: transform 0.2s;">📷</a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="index.html#features">Features</a></li>
-                    <li><a href="index.html#about">About</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Categories</h3>
-                <ul class="footer-links">
-                    <li><a href="shop.html?category=web">Web Applications</a></li>
-                    <li><a href="shop.html?category=app">Mobile Apps</a></li>
-                    <li><a href="shop.html?category=dashboard">Dashboards</a></li>
-                    <li><a href="shop.html?category=template">Templates</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="admin/index.html">Admin Login</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Portfolio Marketplace. All rights reserved. Built with ❤️ for developers.</p>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/shop.js"></script>
-    <script>
-        // Initialize shop page
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.shopFunctions) {
-                window.shopFunctions.initShop();
-            }
-
-            // Check for category parameter in URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category');
-            if (category) {
-                const categoryFilter = document.getElementById('filter-category');
-                if (categoryFilter) {
-                    categoryFilter.value = category;
-                    categoryFilter.dispatchEvent(new Event('change'));
-                }
-            }
-
-            // Update project count
-            updateProjectCount();
-        });
-
-        function updateProjectCount() {
-            const visibleProjects = document.querySelectorAll('.project-card:not([style*="display: none"])');
-            const countEl = document.getElementById('project-count');
-            const noResults = document.getElementById('no-results');
-
-            if (countEl) {
-                countEl.textContent = visibleProjects.length;
-            }
-
-            if (noResults) {
-                noResults.style.display = visibleProjects.length === 0 ? 'block' : 'none';
-            }
-        }
-
-        function resetFilters() {
-            const searchInput = document.getElementById('search-projects');
-            const categoryFilter = document.getElementById('filter-category');
-
-            if (searchInput) searchInput.value = '';
-            if (categoryFilter) categoryFilter.value = 'all';
-
-            if (window.portfolioMarketplace) {
-                window.portfolioMarketplace.filterProjects('', 'all');
-            }
-
-            updateProjectCount();
-        }
-
-        function subscribeNewsletter(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-
-            if (window.portfolioMarketplace) {
-                window.portfolioMarketplace.showNotification('Thanks for subscribing! 🎉', 'success');
-            }
-
-            event.target.reset();
-        }
-
-        // Watch for filter changes to update count
-        const observer = new MutationObserver(updateProjectCount);
-        const projectsGrid = document.getElementById('projects-grid');
-        if (projectsGrid) {
-            observer.observe(projectsGrid, {
-                childList: true,
-                subtree: true,
-                attributes: true,
-                attributeFilter: ['style']
-            });
-        }
-    </script>
 </body>
 
 </html>

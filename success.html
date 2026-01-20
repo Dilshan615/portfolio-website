@@ -17,39 +17,6 @@
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 
-    <style>
-        .success-animation {
-            animation: scaleIn 0.5s ease;
-        }
-
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: #667eea;
-            position: absolute;
-            animation: confetti-fall 3s linear;
-        }
-
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -60,6 +27,12 @@
                 <span>⚡</span>
                 <span>Portfolio Market</span>
             </a>
+
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -79,73 +52,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Portfolio Market</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Premium web projects and templates for
-                    developers and businesses.</p>
-            </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="#">Support</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Need Help?</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Documentation</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact Support</a></li>
-                    <li><a href="#">Refund Policy</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Portfolio Marketplace. All rights reserved. Built with ❤️ for developers.</p>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
 
     <!-- Scripts -->
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/shop.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.shopFunctions) {
-                window.shopFunctions.initSuccessPage();
-            }
-
-            // Create confetti effect
-            createConfetti();
-        });
-
-        function createConfetti() {
-            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#43e97b', '#38f9d7'];
-            const confettiCount = 50;
-
-            for (let i = 0; i < confettiCount; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.style.left = Math.random() * 100 + '%';
-                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.animationDelay = Math.random() * 3 + 's';
-                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    document.body.appendChild(confetti);
-
-                    setTimeout(() => confetti.remove(), 5000);
-                }, i * 30);
-            }
-        }
-    </script>
 </body>
 
 </html>
